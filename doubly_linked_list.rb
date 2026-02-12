@@ -48,13 +48,33 @@ class DoublyLinkedList
     current = @head
     while current
       if current.data == value
+        if current.prev
+          current.prev.next = current.next
+        else
+          @head = current.next
+        end
+
         if current.next
           current.next.prev = current.prev
         else
           @tail = current.prev
         end
+        return
       end
+      current = current.next
     end
+  end
+
+  # return the value and the index of the node if found, otherwise return nil
+  def search(value)
+    current = @head
+    index = 0
+    while current
+      return { value: current.data, index: index } if current.data == value
+      current = current.next
+      index += 1
+    end
+    nil
   end
 end
 
@@ -69,3 +89,7 @@ puts "Node 3 data: #{list.head.next.data.inspect}"
 
 list.remove_by_value(20)
 puts "After removing 20, tail data: #{list.tail.data.inspect}" # Should be 10 since 20 was the tail
+
+search_result = list.search(10)
+# Should find 10
+puts "Search for 10: #{search_result[:value].inspect}, at index: #{search_result[:index]}" 
