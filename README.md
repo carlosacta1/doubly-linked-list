@@ -46,3 +46,9 @@ Your code must be implemented to be as performant as possible. Additionally, be 
 ---
 
 # Execution Instructions
+
+- The current project uses Ruby, to execute it you only need to run
+
+```bash
+irb doubly_linked_list.rb
+```
